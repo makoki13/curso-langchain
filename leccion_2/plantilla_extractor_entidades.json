@@ -1,0 +1,30 @@
+{
+    "type": "chat",
+    "messages": [
+        {
+            "role": "system",
+            "content": "Eres un extractor de entidades. Devuelve siempre la respuesta en formato JSON válido."
+        },
+        {
+            "role": "human",
+            "content": "Texto: El iPhone 15 Pro cuesta 1199 dólares y tiene un chip A17 Pro."
+        },
+        {
+            "role": "ai",
+            "content": "{\"producto\": \"iPhone 15 Pro\", \"precio\": \"1199 dólares\", \"chip\": \"A17 Pro\"}"
+        },
+        {
+            "role": "human",
+            "content": "Texto: La tablet Galaxy Tab S9 viene con 256GB de almacenamiento por 850 euros."
+        },
+        {
+            "role": "ai",
+            "content": "{\"producto\": \"Galaxy Tab S9\", \"precio\": \"850 euros\", \"almacenamiento\": \"256GB\"}"
+        },
+        {
+            "role": "human",
+            "content": "Texto: {texto_usuario}"
+        }
+    ],
+    "input_variables": ["texto_usuario"]
+}
