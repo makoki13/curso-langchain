@@ -1,0 +1,6 @@
+Guia Comercial de NexusTech - Q1 2024
+El producto estrella de NexusTech es la plataforma NexusCloud, una solucion SaaS de orquestacion de IA empresarial.
+Los planes de precios son: Starter a 499 euros al mes, Professional a 1499 euros al mes, y Enterprise con precio personalizado.
+El ciclo de venta tipico para clientes Enterprise es de 3 a 6 meses e incluye una prueba de concepto de 30 dias.
+Los descuentos por volumen comienzan a partir de 10 licencias con un 15 por ciento de reduccion.
+Para solicitar una demo personalizada, el equipo de ventas debe registrar la oportunidad en Salesforce con la etapa Demo Solicitada.

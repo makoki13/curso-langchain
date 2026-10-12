@@ -1,0 +1,6 @@
+Manual de Infraestructura de NexusTech - Version 3.2
+El cluster de Kubernetes de produccion esta compuesto por 12 nodos workers y 3 nodos master.
+Para reiniciar un servicio en produccion, se debe ejecutar el comando kubectl rollout restart deployment/nombre-servicio en el namespace production.
+Toda operacion en produccion requiere la aprobacion previa del Director de Infraestructura y debe registrarse en el sistema de tickets Jira con la etiqueta cambio-produccion.
+El tiempo maximo de ventana de mantenimiento es de 2 horas, preferiblemente entre las 02:00 y las 04:00 UTC.
+Los backups de las bases de datos PostgreSQL se realizan automaticamente cada 6 horas y se retienen durante 30 dias en el bucket S3 nexus-backups-prod.
