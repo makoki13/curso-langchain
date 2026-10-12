@@ -1,4 +1,6 @@
 # pip install ragas datasets
+# pip install langchain-google-vertexai
+# pip install "ragas==0.4.3" "langchain-community<0.4" "google-genai==2.25.0"
 
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
@@ -12,10 +14,12 @@ from langchain_core.runnables import (
     RunnableLambda,     # ← import clave
 )
 from operator import itemgetter # ← import clave para extraer claves
-#from datasets import Dataset
 from ragas import evaluate
 from ragas.dataset_schema import EvaluationDataset  # ← nuevo
 from ragas.metrics import Faithfulness, AnswerRelevancy  # ← ahora son clases
+#from ragas.llms import LangchainLLMWrapper
+
+#from langchain_google_vertexai import ChatVertexAI
 
 
 load_dotenv()
@@ -98,18 +102,24 @@ for pregunta in preguntas_eval:
 
 # ── Paso 5: Ejecutar la evaluacion con RAGAS ─  (adaptado a ragas ≥ 0.2) 
 # Construir el dataset con la nueva API
+
 eval_dataset = EvaluationDataset.from_dict({
     "user_input": preguntas_eval,          # antes: "question"
     "response": respuestas_generadas,      # antes: "answer"
     "retrieved_contexts": contextos_recuperados,  # antes: "contexts"
     "reference": verdad_fundamental,       # antes: "ground_truth"
-})
+}) 
 
 print("\nEjecutando evaluacion con RAGAS...")
+
+#Corregir
+
 resultados = evaluate(
     dataset=eval_dataset,
     metrics=[Faithfulness(), AnswerRelevancy()],  # ← se instancian
 )
+
+
 
 print("\n--- RESULTADOS DE LA EVALUACION ---")
 print(resultados)
