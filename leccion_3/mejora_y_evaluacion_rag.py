@@ -5,22 +5,22 @@
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 from langchain_huggingface import HuggingFaceEmbeddings
-
 from langchain_chroma import Chroma
+
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import (
     RunnableParallel,   # ← import clave
     RunnableLambda,     # ← import clave
 )
+
 from operator import itemgetter # ← import clave para extraer claves
+
 from ragas import evaluate
 from ragas.dataset_schema import EvaluationDataset  # ← nuevo
 from ragas.metrics import Faithfulness, AnswerRelevancy  # ← ahora son clases
-#from ragas.llms import LangchainLLMWrapper
-
-#from langchain_google_vertexai import ChatVertexAI
-
+from ragas.dataset_schema import SingleTurnSample
+from ragas.llms import LangchainLLMWrapper
 
 load_dotenv()
 
@@ -100,26 +100,30 @@ for pregunta in preguntas_eval:
     docs = retriever_hyde.invoke({"pregunta": pregunta})
     contextos_recuperados.append([doc.page_content for doc in docs])
 
-# ── Paso 5: Ejecutar la evaluacion con RAGAS ─  (adaptado a ragas ≥ 0.2) 
+# ── Paso 5: Ejecutar la evaluacion con RAGAS (ragas 0.4.x) ──
 # Construir el dataset con la nueva API
 
-eval_dataset = EvaluationDataset.from_dict({
-    "user_input": preguntas_eval,          # antes: "question"
-    "response": respuestas_generadas,      # antes: "answer"
-    "retrieved_contexts": contextos_recuperados,  # antes: "contexts"
-    "reference": verdad_fundamental,       # antes: "ground_truth"
-}) 
+# Construir una lista de muestras (una por pregunta)
+muestras = []
+for i in range(len(preguntas_eval)):
+    muestra = SingleTurnSample(
+        user_input=preguntas_eval[i],
+        response=respuestas_generadas[i],
+        retrieved_contexts=contextos_recuperados[i],
+        reference=verdad_fundamental[i],
+    )
+    muestras.append(muestra)
+
+eval_dataset = EvaluationDataset(samples=muestras)
 
 print("\nEjecutando evaluacion con RAGAS...")
 
-#Corregir
-
+# En ragas 0.4.x es recomendable pasar el LLM explícitamente
 resultados = evaluate(
     dataset=eval_dataset,
-    metrics=[Faithfulness(), AnswerRelevancy()],  # ← se instancian
+    metrics=[Faithfulness(), AnswerRelevancy()],
+    llm=LangchainLLMWrapper(modelo_llm),  # ← tu ChatGroq
 )
-
-
 
 print("\n--- RESULTADOS DE LA EVALUACION ---")
 print(resultados)
