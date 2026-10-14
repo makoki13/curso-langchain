@@ -1,13 +1,15 @@
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
-from langchain_openai import ChatOpenAI
+from utiles.modelos import get_modelo
 
 load_dotenv()
 
-modelo = ChatOpenAI(
+""" modelo = ChatOpenAI(
     model="gpt-4o-mini",
     temperature=0.0
-)
+) """
+
+modelo = get_modelo("openai")
 
 mensaje_usuario = HumanMessage(content="Explica en una sola frase que es un arnes de IA.")
 mensajes = [mensaje_usuario]

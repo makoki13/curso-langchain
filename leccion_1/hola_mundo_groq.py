@@ -3,15 +3,11 @@
 
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
-from langchain_groq import ChatGroq
+from utiles.modelos import get_modelo
 
 load_dotenv()
 
-nombre_modelo = "qwen/qwen3.8-27b"
-modelo = ChatGroq(
-    model=nombre_modelo,
-    temperature=0.0
-)
+modelo = get_modelo("groq")
 mensaje_usuario = HumanMessage(content="Explica en una sola frase que es un arnes de IA.")
 mensajes = [mensaje_usuario]
 
