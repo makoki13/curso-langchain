@@ -11,7 +11,7 @@ from langchain_groq import ChatGroq
 load_dotenv()
 
 modelo = ChatGroq(model="qwen/qwen3.8-27b",temperature=0.0)
-parser = StrOutputParser()
+parser = StrOutputParser() # El StrOutputParser hace una sola cosa: toma un AIMessage y devuelve su atributo .content como string.
 
 # Paso 1: Definir los prompts y cadenas intermedias
 prompt_clasificador = ChatPromptTemplate.from_template(
