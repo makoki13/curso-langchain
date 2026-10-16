@@ -65,7 +65,7 @@ cadena_completa = (
 
     # El diccionario de salida ahora tiene: {"consulta": "...", "categoria": "...", "respuesta": "..."}
 
-    # Tercero, aplicamos nuestra funcion personalizada para formatear el reporte final.
+    # Tercero, aplicamos nuestra funcion personalizada para formatear el reporte final. RunnableLambda envuelve un código Python en un Runnable
     | RunnableLambda(construir_reporte_final)
 )
 

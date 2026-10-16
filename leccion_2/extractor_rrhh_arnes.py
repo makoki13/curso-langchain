@@ -108,15 +108,15 @@ Observa el primer paso de la cadena. Utilizamos un diccionario para construir la
 # Paso 7: Ejecucion del arnes
 if __name__ == "__main__":
     texto_prueba = """
-    En la reunion de ayer, conocimos a nuestro nuevo Director de Tecnologia, Carlos Mendez.
+    En la reunion de ayer, conocimos a nuestro nuevo Director de Tecnologia, Carlos Méndez.
     Carlos tiene 15 anios de experiencia en arquitectura de software y es experto en Python,
     Kubernetes y sistemas distribuidos. Su correo es carlos.mendez@empresa.com.
 
-    Tambien se unio al equipo de Data Science Laura Ramirez, quien trabajara en el departamento
+    Tambien se unio al equipo de Data Science Laura Ramírez, quien trabajara en el departamento
     de Inteligencia Artificial. Laura tiene 5 anios de experiencia y domina TensorFlow, PyTorch
     y MLOps. Puedes contactarla en laura.r@empresa.com.
 
-    Adicionalmente, mencionaron que Pedro Sanchez se mudara al departamento de Ventas, aunque
+    Adicionalmente, mencionaron que Pedro Pérez se mudara al departamento de Ventas, aunque
     no se especificaron sus habilidades tecnicas ni su correo.
     """
 
