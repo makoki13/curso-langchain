@@ -1,6 +1,5 @@
 from dotenv import load_dotenv
 from langchain.tools import tool
-from langchain.agents import create_agent
 from utiles import modelos
 from langchain.messages import HumanMessage
 
@@ -18,15 +17,17 @@ def square(x: float) -> float:
 
 
 # create subagents
-subagent_1 = create_agent(
+""" subagent_1 = create_agent(
         model=modelos.get_modelo(""),
         tools=[square_root], 
-)
+) """
+subagent_1 = modelos.get_agente("",tools=[square_root])
 
-subagent_2 = create_agent(
+""" subagent_2 = create_agent(
         model=modelos.get_modelo(""),
         tools=[square], 
-)
+) """
+subagent_2 = modelos.get_agente("",tools=[square])
 
 @tool
 def call_subagent_1(x: float) -> float:
@@ -42,11 +43,14 @@ def call_subagent_2(x: float) -> float:
 
 ## Creating the main agent
 
-main_agent = create_agent(
+""" main_agent = create_agent(
         model=modelos.get_modelo(""),
         tools=[call_subagent_1, call_subagent_2],
         system_prompt="You are a helpful assistant who can call subagents to calculate the square root or square of a number."
-)
+) """
+prompt_sistema = "You are a helpful assistant who can call subagents to calculate the square root or square of a number."
+main_agent = modelos.get_agente("",tools=[call_subagent_1, call_subagent_2],prompt_sistema=prompt_sistema)
+
 
 question = "What is the square of 456?"
 #question = "What is the square root of 456?"
