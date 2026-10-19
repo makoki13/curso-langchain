@@ -155,6 +155,6 @@ if '__interrupt__' in response:
     )
     
     print("\n=== Después de aprobar ===")
-    print(response['messages'][-1].content)
+    print(response['messages'][-1].text)
 else:
     print("\nNo se alcanzó la interrupción después de múltiples iteraciones")
