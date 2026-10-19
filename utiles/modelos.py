@@ -1,4 +1,4 @@
-def get_modelo(nombre: str):
+def get_modelo(nombre: str = ""):
     """
     Devuelve una instancia del modelo de lenguaje indicado.
 
